@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "new-scratch3-api": "^3.0.4",
+    "rss-parser": "^3.12.0",
+    "sanitize-html": "^2.7.0"
+  },
+  "name": "scratch-forums",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Shock59"
+}

@@ -39,10 +39,11 @@ function sleep(ms) {
 
             let string = "";
             for(let charId in comment[key]) {
-                const num = encodingKey.findIndex(item=>item===comment[key][charId]) + 1;
-                string += (num < 10 ? "0":"")+num;
+                const num = encodingKey.findIndex(item=>item===comment[key].toLowerCase()[charId]) + 1;
+                string = string + (num < 10 ? "0":"")+num;
             };
 
+            console.log(comment[key] + " - " + string)
             newComment[key] = string;
         });
         encodedComments.push(newComment);
@@ -50,10 +51,7 @@ function sleep(ms) {
 
     let encodedString = "";
     encodedComments.forEach(comment => {
-        encodedString += comment.author + "00" + comment.summary;
-        if (encodedComments.length -1 !== encodedComments.indexOf(comment)) {
-            encodedString += "00";
-        };
+        encodedString += comment.author + "99" + comment.summary + "99";
     });
 
     const splitString = encodedString.match(new RegExp('.{1,' + 254 + '}', 'g')); // fancy regex which i don't understand that splits it every 254 chars
@@ -64,11 +62,11 @@ function sleep(ms) {
         await cloud.set("☁ cloud", "19" + string);
         let cloudValue = "not20";
         while(cloudValue != "20") {
-            await sleep(101);
+            await sleep(150);
             cloudValue = cloud.get("☁ cloud");
         };
         console.log("done!");
-        await sleep(101);
+        await sleep(150);
     };
     await cloud.set("☁ cloud", "11");
 
